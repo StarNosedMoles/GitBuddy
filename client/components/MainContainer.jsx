@@ -12,6 +12,7 @@ class MainContainer extends Component {
       {name: "I got another repo", followers: [1,2,3,4,5]}],
       personalFollowers: ['Amy', 'Beth', 'Carl', 'Drago'],
       checked: new Map(),
+      fakeChecked: { 'box-one': false, 'box-two' : false, 'box-three' : false}
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -49,8 +50,11 @@ class MainContainer extends Component {
         personalFollowers={this.state.personalFollowers}
         getFollowers={this.getFollowers}
         handleChange={this.handleChange}
-        checkedItems={this.state.checked}/>
-        <DataDisplay />
+        checkedItems={this.state.checked}
+        />
+        <DataDisplay 
+        fakeCheckedItems={this.state.fakeChecked}
+        />
       </div>
     );
   }

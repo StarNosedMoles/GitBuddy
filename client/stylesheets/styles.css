@@ -3,45 +3,37 @@
 * {
   font-family: 'Source Code Pro', monospace;
   background-color: seagreen;
+  text-align: center;
   box-sizing: border-box;
 }
 
 h1 {
-  text-align: center;
   padding-top: 100px;
 }
-
 /* h1 {
   text-align: center;
 } */
 
 ul{
   list-style-type: none;
-  /* border: 5px, solid, blueviolet  ;
-  align-items: center; */
-  /* background-color: aquamarine;  */
 }
-/* ul .repo {
+.repo {
   border: 5px, solid, blueviolet  ;
   background-color: aquamarine;
     display: flex;
   flex-direction: column;
   align-content: space-between;
-} */
+}
 
-/* .repoGrabber {
+.repoGrabber {
   border: 5px, solid, blueviolet  ;
   background-color: aquamarine;
   /* display: flex;
   flex-direction: column;
-  align-content: space-between; 
-} */
+  align-content: space-between; */
+}
 
 .octoCat {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
   height: 200px;
   width: 250px;
 }
