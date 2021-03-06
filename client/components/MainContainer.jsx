@@ -10,9 +10,12 @@ class MainContainer extends Component {
       repos: [{name: "myFirst Repo", followers: [1,2,3,4,5]},
       {name: "my Onlyfans Repo", followers: [1,2,3,4,5]},
       {name: "I got another repo", followers: [1,2,3,4,5]}],
-      personalFollowers: ['Amy', 'Beth', 'Carl', 'Drago']
+      personalFollowers: ['Amy', 'Beth', 'Carl', 'Drago'],
+      checked: new Map(),
     };
     this.getFollowers = this.getFollowers.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
   }
 
   getFollowers(checked){
@@ -21,6 +24,12 @@ class MainContainer extends Component {
     console.log(checked);
     console.log('hello')
     checked.persist();
+  }
+
+    handleChange(e) {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    this.setState(prevState => ({...this.state, checked: prevState.checked.set(item, isChecked) }));
   }
 
   componentDidMount () {
@@ -38,7 +47,9 @@ class MainContainer extends Component {
         <RepoGrabber 
         repos={this.state.repos}
         personalFollowers={this.state.personalFollowers}
-        getFollowers={this.getFollowers}/>
+        getFollowers={this.getFollowers}
+        handleChange={this.handleChange}
+        checkedItems={this.state.checked}/>
         <DataDisplay />
       </div>
     );

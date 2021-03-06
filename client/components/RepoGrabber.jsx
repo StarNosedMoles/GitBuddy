@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
-import Repo from './Repo';
+import checkboxes from './configs/config.jsx';
+import Checkbox from './Checkbox'
 
 function RepoGrabber(props){
-  let repoArray =[];
-  //another with details about repo
-  for(let i=0;i<props.repos.length;i++){
-    repoArray.push(<Repo
-      key={`repo${i}`} 
-      className={`repo`}
-      id={`repo${i}`}
-      name={`repo${i}`}
-      value={true}
-      for={`repo${i}`}
-      type="checkbox"
-      insideText={`${props.repos[i].name}`}
-    />)
+  console.log(props)
+    return (
+      <React.Fragment>
+        {
+          checkboxes.map(item => (
+            <label key={item.key}>
+              {item.name}
+              <Checkbox name={item.name} checked={props.checkedItems.get(item.name)} onChange={props.handleChange} />
+            </label>
+          ))
+        }
+      </React.Fragment>
+    );
   }
-  console.log(repoArray)
-  return(
-    <div className="repoGrabber" >
-      <ul>
-        {repoArray}
-      </ul>
-      <button onClick={(e)=> props.getFollowers(e)}>Get My Followers!</button>
-    </div>
-  );
-}
 
 export default RepoGrabber;
