@@ -53,7 +53,7 @@ class MainContainer extends Component {
         checkedItems={this.state.checked}
         />
         <DataDisplay 
-        fakeCheckedItems={this.state.fakeChecked}
+        checkedItems={this.state.checked}
         />
       </div>
     );

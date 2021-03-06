@@ -2,23 +2,24 @@ import React, { Component } from 'react';
 
 
 function DataDisplay(props){
-  console.log('props: ', props.fakeCheckedItems)
-  const fakeObj = props.fakeCheckedItems
-  console.log('fakeObj:', fakeObj)
-  const fakeArray = [];
-  for(const prop in fakeObj){
-    if (fakeObj[prop]){
+  console.log('props: ', props.checkedItems)
+  const repoObj = props.checkedItems
+  console.log('repoObj:', repoObj)
+  const repoArray = [];
+  for(const [key, value] of repoObj){
+    console.log("prop in loop", key)
+    if (value){
+      repoArray.push(<p>{key}</p>)
 
-      fakeArray.push(<p>{prop}</p>)
     }
   }
 
-  console.log(fakeArray)
+  console.log('repoArray: ', repoArray)
   // const items = []
   // props.fakeCheckedItems.forEach(el=>{
   //   items.push(<p>{el}</p>)
   // })
-  return(<p>Data Display, howdy assholes: {fakeArray}</p>);
+  return(<p>Data Display, howdy assholes: {repoArray}</p>);
 }
 
 export default DataDisplay;
