@@ -26,7 +26,8 @@ app.get('/login',
   
   (req, res) => {
     //on successful login - redirect to root
-    return res.send('OAuth login complete');
+    // return res.end();
+    return res.redirect('/main');
   }
 );
 
