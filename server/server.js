@@ -9,10 +9,10 @@ const sessionController = require('./controllers/auth/sessionController');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-app.use(bodyParser.json());
+app.use(bodyParser.json());//my vscode sais bodyParser is depreciated... we can use express.json?
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => {//check for cookies?
   return res
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));
@@ -25,6 +25,7 @@ app.get('/login',
   cookieController.setSSIDCookie,
   sessionController.startSession,
   //startSession
+  //in retrospect, I think it makes sence to combing the get and create controlers into one
   
   (req, res) => {
     //on successful login - redirect to root

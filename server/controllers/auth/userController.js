@@ -13,13 +13,15 @@ userController.getUser = (req, res, next) => {
   db.query(query, (err, result) => {
 
     if(result.rows.length === 0) {
-      return next();
-    }
-    
-    if (err) {
+      //return next(); 
+    } 
+    else if (err) {
       return next({
-        message: 'No user'
+        message: 'Error getting users' //are you sure we dont have to pass in err into next?
       });
+    }
+    else {
+      //return next(); 
     }
   });
 };
