@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+* {
+  font-family: 'Source Code Pro', monospace;
+  background-color: seagreen;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+h1 {
+  padding-top: 100px;
+}
+/* h1 {
+  text-align: center;
+} */
+
+ul{
+  list-style-type: none;
+}
+.repo {
+  border: 5px, solid, blueviolet  ;
+  background-color: aquamarine;
+    display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.repoGrabber {
+  border: 5px, solid, blueviolet  ;
+  background-color: aquamarine;
+  /* display: flex;
+  flex-direction: column;
+  align-content: space-between; */
+}
+
+.octoCat {
+  height: 200px;
+  width: 250px;
+}

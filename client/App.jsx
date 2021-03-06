@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
 import { Switch, Route, Router, Link, useLocation } from 'react-router-dom';
- 
 
-// import ' stylesheet';
+import Login from './components/Login.jsx';
+import MainContainer from './components/MainContainer.jsx';
+
+import './stylesheets/styles.css';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      loggedIn: false,
-    };
-  }
-  
   render(){
-    if(this.state.loggedIn === false){
-      return (
-        <div className="oauth">
-          {/* oauth button */}
-        </div>
-      );
-    }else{
-      return (
-        <div className='loggedIn'>
-          {/* <mainContainer> */}
-        </div>
-      );
-    }
-  
+    return (
+      <div className="router">
+        <h1>gitBuddy</h1>
+
+        <main>
+
+          <Switch >
+            <Route
+              exact
+              path="/"
+              component={
+                () => <Login />
+              }>         
+            </Route>   
+            <Route
+              exact
+              path="/main"
+              component={
+                () => <MainContainer />
+              }>         
+            </Route>        
+          </Switch>
+        </main>
+      </div>
+    );
   }
 }
+
+
+
 export default App;

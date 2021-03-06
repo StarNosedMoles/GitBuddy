@@ -22,6 +22,11 @@ app.get("/", (req, res) => {
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 //main OAuth Complete
+//UPDATE ---- to serve index after successful login WORKS GREAT
+app.get("/main", (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, "../client/index.html"));
+});
+
 app.get(
   "/login",
   OAuthController.getCode,
@@ -38,7 +43,8 @@ app.get(
 
   (req, res) => {
     //on successful login - redirect to root
-    return res.send("OAuth login complete");
+    // return res.end();
+    return res.redirect("/main");
   }
 );
 
