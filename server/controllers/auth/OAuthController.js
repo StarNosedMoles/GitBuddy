@@ -24,8 +24,9 @@ OAuthController.getCode = (req, res, next) => {
       return response.json();
     })
     .then((data) => {
+      console.log('data from OAuth', data)
       console.log('access token', data.access_token);
-      res.locals.userId = data.access_token;
+      res.locals.accessToken = data.access_token;
       return next();
     })
     .catch((err) => null);
