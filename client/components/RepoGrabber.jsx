@@ -12,7 +12,7 @@ function RepoGrabber(props){
         label: `Check Box ${i}`
       });
   }
-  console.log(props);
+  // console.log(props);
     return (
       <React.Fragment>
         {
@@ -23,6 +23,7 @@ function RepoGrabber(props){
             </label>
           ))
         }
+        <button onClick={() => props.getFollowers()}>Get My Followers!</button>
       </React.Fragment>
     );
 }
