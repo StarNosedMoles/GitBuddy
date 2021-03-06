@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
     .sendFile(path.resolve(__dirname, "../client/index.html"));
 });
 
+<<<<<<< HEAD
+app.use('/build', express.static(path.join(__dirname, '../build')))
+=======
 app.use('/build', express.static(path.join(__dirname, '../build')));
 //main OAuth Complete
 app.get('/login', 
@@ -30,6 +33,7 @@ app.get('/login',
     return res.send('OAuth login complete');
   }
 );
+>>>>>>> 50d00c9fc1a951b5f2e4c11102d08299b1667c60
 
 app.use('*', (req,res) => {
   res.status(404).send('Not Found');
@@ -39,7 +43,15 @@ app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).send("Internal Server Error");
 });
-  
+
+if(process.env.NODE_ENV === "production"){
+// statically serve everything in the build folder on the route '/build'
+app.use('/build', express.static(path.join(__dirname, '../build')));
+// serve index.html on the route '/'
+app.get('/', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
+}
   
 app.listen(3000);
 
