@@ -23,6 +23,7 @@ class MainContainer extends Component {
     //db fetch request; find 
     //fetch("/datadisplay")
     console.log(checked);
+    console.log('hello')
     checked.persist();
   }
 
@@ -49,8 +50,11 @@ class MainContainer extends Component {
         personalFollowers={this.state.personalFollowers}
         getFollowers={this.getFollowers}
         handleChange={this.handleChange}
-        checkedItems={this.state.checked}/>
-        <DataDisplay />
+        checkedItems={this.state.checked}
+        />
+        <DataDisplay 
+        checkedItems={this.state.checked}
+        />
       </div>
     );
   }
