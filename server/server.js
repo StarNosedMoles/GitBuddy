@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 //auth controllers
 const OAuthController = require("./controllers/auth/OAuthController");
@@ -9,9 +10,11 @@ const cookieController = require("./controllers/auth/cookieController");
 const sessionController = require("./controllers/sessionController");
 const userController = require("./controllers/userController");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 app.use(bodyParser.json()); //my vscode sais bodyParser is depreciated... we can use express.json?
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   //check for cookies?
@@ -24,6 +27,7 @@ app.use("/build", express.static(path.join(__dirname, "../build")));
 //main OAuth Complete
 //UPDATE ---- to serve index after successful login WORKS GREAT
 app.get("/main", (req, res) => {
+  //console.log("test for session object----------", req.session.user);
   return res.status(200).sendFile(path.join(__dirname, "../client/index.html"));
 });
 
@@ -31,20 +35,27 @@ app.get(
   "/login",
   OAuthController.getCode,
   OAuthController.getUser,
-  //user object now availabe on res.locals.user
   cookieController.setSSIDCookie,
-  sessionController.startSession,
-  userController.getOrCreateUser,
+  //user object now availabe on res.locals.user
+  userController.getUser,
   userController.createUser,
-  //createUser
-  // userController.getOrCreateUser,
-  //startSession
-  //in retrospect, I think it makes sence to combing the get and create controlers into one
+
+  // sessionController.startSession,
+  //why not route to main here? then we can have a compnent did mount fets that will use our usercontroler :)
 
   (req, res) => {
     //on successful login - redirect to root
     // return res.end();
+    //console.log("ROUTE REQ", req);
     return res.redirect("/main");
+  }
+);
+
+app.get(
+  "/getUser",
+  OAuthController.getUser, 
+  (req, res) => {
+    return res.json(res.locals.user);
   }
 );
 
