@@ -22,7 +22,7 @@ userController.getOrCreateUser = (req, res, next) => {
         error: err
       });
     } else {
-      return res.send("OAuth login complete; user found in database")
+      return res.redirect('/main')
     }
   });
 };
