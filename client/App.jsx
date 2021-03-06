@@ -1,11 +1,41 @@
-import React from "react";
+import React, { Component } from 'react';
+import { Switch, Route, Router, Link, useLocation } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <div className="test">
-      <p>hello world</p>
-    </div>
-  );
-};
+import Login from './components/Login.jsx';
+import MainContainer from './components/MainContainer.jsx';
+
+import './stylesheets/styles.css';
+
+class App extends Component {
+  render(){
+    return (
+      <div className="router">
+        <h1>gitBuddy</h1>
+
+        <main>
+
+          <Switch >
+            <Route
+              exact
+              path="/"
+              component={
+                () => <Login />
+              }>         
+            </Route>   
+            <Route
+              exact
+              path="/main"
+              component={
+                () => <MainContainer />
+              }>         
+            </Route>        
+          </Switch>
+        </main>
+      </div>
+    );
+  }
+}
+
+
 
 export default App;

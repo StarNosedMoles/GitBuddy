@@ -32,6 +32,14 @@ module.exports = {
         }
       },
       {
+        test: /\.(png|jpe?g|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
         test: /.(css|scss)$/,
         exclude: [/node_modules/, /client\/stylesheets\/modules/],
         use: ['style-loader', 'css-loader', 'sass-loader'],
