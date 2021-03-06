@@ -5,7 +5,7 @@ const path = require('path');
 //auth controllers
 const OAuthController = require('./controllers/auth/OAuthController');
 const cookieController = require('./controllers/auth/cookieController');
-
+const sessionController = require('./controllers/auth/sessionController');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -27,6 +27,7 @@ return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 app.get('/login', 
   OAuthController.getCode,
   cookieController.setSSIDCookie,
+  sessionController.startSession,
   //startSession
   
   (req, res) => {
@@ -45,13 +46,13 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 });
 
-if(process.env.NODE_ENV === "production"){
+if(process.env.NODE_ENV === 'production'){
 // statically serve everything in the build folder on the route '/build'
-app.use('/build', express.static(path.join(__dirname, '../build')));
-// serve index.html on the route '/'
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  });
 }
   
 app.listen(3000);
