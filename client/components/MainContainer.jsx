@@ -12,7 +12,7 @@ class MainContainer extends Component {
       {name: "I got another repo", followers: [1,2,3,4,5]}],
       personalFollowers: ['Amy', 'Beth', 'Carl', 'Drago'],
       checked: new Map(),
-      fakeChecked: { 'box-one': false, 'box-two' : false, 'box-three' : false}
+      fakeChecked:{box1: true, box2: false, box3:true}
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);

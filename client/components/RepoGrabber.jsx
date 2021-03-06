@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import checkboxes from './configs/config.jsx';
+import Repo from './Repo';
 import Checkbox from './Checkbox'
 
 function RepoGrabber(props){
-  console.log(props)
+  let repoArray =[];
+  //another with details about repo
+  for(let i=0;i<props.repos.length;i++){
+    repoArray.push(
+      {name: props.repos[i].name,
+        key: `checkBox${i}`,
+        label: `Check Box ${i}`
+      });
+  }
+  console.log(props);
     return (
       <React.Fragment>
         {
-          checkboxes.map(item => (
+          repoArray.map(item => (
             <label key={item.key}>
               {item.name}
               <Checkbox name={item.name} checked={props.checkedItems.get(item.name)} onChange={props.handleChange} />
@@ -16,6 +25,6 @@ function RepoGrabber(props){
         }
       </React.Fragment>
     );
-  }
+}
 
 export default RepoGrabber;
