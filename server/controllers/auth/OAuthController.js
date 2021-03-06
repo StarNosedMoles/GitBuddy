@@ -34,9 +34,14 @@ OAuthController.getCode = (req, res, next) => {
 };
 
 OAuthController.getUser = (req, res, next) => {
+  let code;
+
+  if (res.locals.accessToken) code = res.locals.accessToken;
+  else code = req.cookies.SSID;
+
 
   fetch('https://api.github.com/user', {
-    headers: {Authorization: `token ${res.locals.accessToken}`}
+    headers: {Authorization: `token ${code}`}
   })
     .then(data => {
       return data.json()
