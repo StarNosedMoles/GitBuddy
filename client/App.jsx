@@ -9,23 +9,23 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-    }
+    };
   }
   
   render(){
     if(this.state.loggedIn === false){
-    return (
-      <div className="oauth">
-        {/* oauth button */}
-      </div>
-    )
-  }else{
-    return (
-      <div className='loggedIn'>
+      return (
+        <div className="oauth">
+          {/* oauth button */}
+        </div>
+      );
+    }else{
+      return (
+        <div className='loggedIn'>
           {/* <mainContainer> */}
-      </div>
-    )
-  }
+        </div>
+      );
+    }
   
   }
 }
