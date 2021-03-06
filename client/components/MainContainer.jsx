@@ -12,18 +12,23 @@ class MainContainer extends Component {
       {name: "I got another repo", followers: [1,2,3,4,5]}],
       personalFollowers: ['Amy', 'Beth', 'Carl', 'Drago'],
       checked: new Map(),
-      fakeChecked:{box1: true, box2: false, box3:true}
+      toBeSent: new Map(),
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
   }
 
-  getFollowers(checked){
-    //db fetch request; find 
-    //fetch("/datadisplay")
-    console.log(checked);
-    checked.persist();
+  getFollowers(){
+    let toBeSent = new Map();
+    for(const [key, value] of this.state.checked){
+      console.log("key in loop", key, value)
+    if (value===true){
+      toBeSent.set(key, value);
+    }}
+    console.log("toBeSent in func?", toBeSent)
+    this.setState({...this.state, toBeSent: toBeSent})
+    setTimeout(() => {console.log("toBeSent in state?", this.state)}, 1000)
   }
 
     handleChange(e) {
@@ -34,10 +39,10 @@ class MainContainer extends Component {
 
   componentDidMount () {
     //db fetch request
-    // fetch("/initialLoad")
-    // .then((res) => res.json())
-    // .then((data) => this.setState({...this.state, repos: [...data]}))
-    // .catch(err => console.log(err));
+    fetch("/getUser")
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch(err => console.log(err));
     //that url runs a get request on the db 
   }
 
@@ -49,8 +54,11 @@ class MainContainer extends Component {
         personalFollowers={this.state.personalFollowers}
         getFollowers={this.getFollowers}
         handleChange={this.handleChange}
-        checkedItems={this.state.checked}/>
-        <DataDisplay />
+        checkedItems={this.state.checked}
+        />
+        <DataDisplay 
+        toBeSent={this.state.toBeSent}
+        />
       </div>
     );
   }
