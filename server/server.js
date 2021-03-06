@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-
+app.use('/build', express.static(path.join(__dirname, '../build')))
 
 app.use('*', (req,res) => {
   res.status(404).send('Not Found');
