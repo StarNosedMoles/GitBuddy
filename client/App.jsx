@@ -10,6 +10,7 @@ class App extends Component {
   render(){
     return (
       <div className="router">
+        <h1>gitBuddy</h1>
 
         <main>
 

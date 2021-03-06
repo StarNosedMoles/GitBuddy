@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 //main OAuth Complete
-
+//UPDATE ---- to serve index after successful login WORKS GREAT
 app.get('/main', (req, res) => {
 return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
