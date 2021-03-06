@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Router, Link, useLocation } from 'react-router-dom';
-
+import RepoGrabber from './RepoGrabber.jsx';
 
 class MainContainer extends Component {
   constructor(props){
@@ -12,10 +11,9 @@ class MainContainer extends Component {
   }
 
   render(){
-    console.log("rendering maincontainer");
     return(
-      <div>
-        <p>Howdy</p>
+      <div className="MainContainer">
+        <RepoGrabber />
       </div>
     );
   }

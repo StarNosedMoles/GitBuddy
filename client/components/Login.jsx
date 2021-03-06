@@ -8,7 +8,7 @@ function Login(props){
           <a href={`${oAuthUrl}`} ><img src='https://github.githubassets.com/images/modules/logos_page/Octocat.png' 
             alt='GitHub Octocat' 
             style={{height: '200px', width: '250px', marginLeft: '25%'}}
-            onClick={() => this.logger()}></img></a> 
+            ></img></a> 
         </div>
       )
     }

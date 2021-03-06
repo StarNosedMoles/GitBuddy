@@ -19,6 +19,11 @@ app.get('/', (req, res) => {
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 //main OAuth Complete
+
+app.get('/main', (req, res) => {
+return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+});
+
 app.get('/login', 
   OAuthController.getCode,
   cookieController.setSSIDCookie,
