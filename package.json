@@ -33,6 +33,7 @@
     "mongoose": "^5.11.18",
     "node-fetch": "^2.6.1",
     "node-sass": "^5.0.0",
+    "pg": "^8.5.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-bootstrap": "^1.5.1",
