@@ -25,9 +25,13 @@ app.use("/build", express.static(path.join(__dirname, "../build")));
 app.get(
   "/login",
   OAuthController.getCode,
+  OAuthController.getUser,
+  //user object now availabe on res.locals.user
   cookieController.setSSIDCookie,
   sessionController.startSession,
-  userController.githubApi,
+  userController.getOrCreateUser,
+  userController.createUser,
+  //createUser
   // userController.getOrCreateUser,
   //startSession
   //in retrospect, I think it makes sence to combing the get and create controlers into one
