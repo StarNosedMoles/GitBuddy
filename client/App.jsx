@@ -1,14 +1,32 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import React, { Component } from 'react';
+import { Switch, Route, Router, Link, useLocation } from 'react-router-dom';
+ 
 
-const App = () => {
-  return (
-    <div className="test">
-      <p>hello world</p>
-    </div>
-  );
-};
+// import ' stylesheet';
 
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      loggedIn: false,
+    }
+  }
+  
+  render(){
+    if(this.state.loggedIn === false){
+    return (
+      <div className="oauth">
+        {/* oauth button */}
+      </div>
+    )
+  }else{
+    return (
+      <div className='loggedIn'>
+          {/* <mainContainer> */}
+      </div>
+    )
+  }
+  
+  }
+}
 export default App;
