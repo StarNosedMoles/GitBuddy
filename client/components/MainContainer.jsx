@@ -8,10 +8,12 @@ class MainContainer extends Component {
     this.state = {
       loggedIn: true,
       name: '',
-      repos: [{name: "myFirst Repo", followers: [1,2,3,4,5]},
-      {name: "my Onlyfans Repo", followers: [1,2,3,4,5]},
-      {name: "I got another repo", followers: [1,2,3,4,5]}],
-      personalFollowers: ['Amy', 'Beth', 'Carl', 'Drago'],
+      // repos: [{name: "myFirst Repo", followers: [1,2,3,4,5]},
+      repos: [],
+      personalFollowers: [{ name : 'Kushal', email: 'fakeemail@email.email' },  
+      { name : 'David', email: 'fakeemail@email.email' },  
+      { name : 'Joseph', email: 'fakeemail@email.email' },  
+      { name : 'Greg', email: 'fakeemail@email.email' },],
       checked: new Map(),
       toBeSent: new Map(),
     };
@@ -45,7 +47,7 @@ class MainContainer extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        this.setState({...this.state, name : data.name})
+        this.setState({...this.state, name : data.user.name, repos: data.repos});
       })
       .catch(err => console.log(err));
     //that url runs a get request on the db 
@@ -63,7 +65,7 @@ class MainContainer extends Component {
         checkedItems={this.state.checked}
         />
         <DataDisplay 
-        toBeSent={this.state.toBeSent}
+        personalFollowers={this.state.personalFollowers}
         />
       </div>
     );
