@@ -17,7 +17,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.scss', '.gif', '.png', '.jpg', '.jpeg', '.svg']
   },
   module: {
     rules: [

@@ -7,6 +7,7 @@ class MainContainer extends Component {
     super(props);
     this.state = {
       loggedIn: true,
+      name: '',
       repos: [{name: "myFirst Repo", followers: [1,2,3,4,5]},
       {name: "my Onlyfans Repo", followers: [1,2,3,4,5]},
       {name: "I got another repo", followers: [1,2,3,4,5]}],
@@ -29,6 +30,7 @@ class MainContainer extends Component {
     console.log("toBeSent in func?", toBeSent)
     this.setState({...this.state, toBeSent: toBeSent})
     setTimeout(() => {console.log("toBeSent in state?", this.state)}, 1000)
+    // fetch request to db for user's repo follower data should go here
   }
 
     handleChange(e) {
@@ -40,15 +42,19 @@ class MainContainer extends Component {
   componentDidMount () {
     //db fetch request
     fetch("/getUser")
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch(err => console.log(err));
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({...this.state, name : data.name})
+      })
+      .catch(err => console.log(err));
     //that url runs a get request on the db 
   }
 
   render(){
     return(
       <div className="MainContainer">
+        <h3>Hi, {this.state.name}. Would you like to see your bomb ass repos?</h3>
         <RepoGrabber 
         repos={this.state.repos}
         personalFollowers={this.state.personalFollowers}
