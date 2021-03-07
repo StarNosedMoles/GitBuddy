@@ -3,12 +3,12 @@ const fetch = require('node-fetch');
 const OAuthController = {};
 
 OAuthController.getCode = (req, res, next) => {
-    
+
   const parameters = {
     //encrypt client id
-    client_id: '13e0e054832447d72513',
+    client_id: process.env.CLIENT_ID,
     //encrypt client secret
-    client_secret: '2acec6f07e526065d5bee5c0952d80a59f22814e',
+    client_secret: process.env.CLIENT_SECRET,
     code: req.query.code,
   };
 
