@@ -1,8 +1,8 @@
-const fetch = require("node-fetch");
-const db = require("../buddyModels");
-const Octokat = require("octokat");
-const octo = new Octokat({ token: `b00a94451c1b2a5dd2cb8dcde81c4264ad3b1474` });
-const session = require("express-session");
+const fetch = require('node-fetch');
+const db = require('../buddyModels');
+const Octokat = require('octokat');
+const octo = new Octokat({ token: 'b00a94451c1b2a5dd2cb8dcde81c4264ad3b1474' });
+const session = require('express-session');
 
 const userController = {};
 
@@ -10,7 +10,7 @@ userController.getUser = (req, res, next) => {
   //check db if user in database
   //console.log("res locals: ", res.locals);
   const queryToGet = {
-    text: "SELECT * FROM users WHERE github_user_id = $1",
+    text: 'SELECT * FROM users WHERE github_user_id = $1',
     values: [`${res.locals.user.id}`],
   };
   db.query(queryToGet, (err, result) => {
@@ -20,13 +20,14 @@ userController.getUser = (req, res, next) => {
       return next();
     } else if (err) {
       return next({
-        message: "Error getting users",
+        message: 'Error getting users',
         error: err,
       });
     } else {
       // console.log(result.rows)
       res.locals.user = result.rows[0];
-      return res.redirect("/main");
+      //return res.redirect("/main");
+      return res.json(res.locals.user);
       // return next();
     }
   });
@@ -68,13 +69,14 @@ userController.createUser = (req, res, next) => {
   db.query(queryToCreate, (err, result) => {
     if (err)
       return next({
-        message: "Error creating user",
+        message: 'Error creating user',
         error: err,
       });
     else {
-      console.log("User entry worked!--------------------------------");
+      console.log('User entry worked!--------------------------------');
       res.locals.user = result.rows[0];
-      return next();
+      //return next();
+      return res.json(res.locals.user);
     }
   });
 };

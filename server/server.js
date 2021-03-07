@@ -37,8 +37,8 @@ app.get(
   OAuthController.getUser,
   cookieController.setSSIDCookie,
   //user object now availabe on res.locals.user
-  userController.getUser,
-  userController.createUser,
+  // userController.getUser,
+  // userController.createUser,
 
   // sessionController.startSession,
   //why not route to main here? then we can have a compnent did mount fets that will use our usercontroler :)
@@ -54,6 +54,14 @@ app.get(
 app.get(
   '/getUser',
   OAuthController.getUser, 
+  userController.getUser,
+  userController.createUser,
+  //userController logic here instead of login to serve info from DB instead of API
+  //more controllers to populate repo info before sending response
+
+  //get one call
+  
+  //DO REPO DRILLING
   (req, res) => {
     return res.json(res.locals.user);
   }

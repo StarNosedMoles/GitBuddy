@@ -39,12 +39,12 @@ OAuthController.getUser = (req, res, next) => {
   if (res.locals.accessToken) code = res.locals.accessToken;
   else code = req.cookies.SSID;
 
-
+  
   fetch('https://api.github.com/user', {
     headers: {Authorization: `token ${code}`}
   })
     .then(data => {
-      return data.json()
+      return data.json();
     })
     .then(data => {
       res.locals.user = data;
@@ -55,9 +55,9 @@ OAuthController.getUser = (req, res, next) => {
       return next({
         message: 'Error getting user data in getUser',
         error: err
-      })
-    })
-}
+      });
+    });
+};
 
 
 
