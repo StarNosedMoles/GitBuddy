@@ -26,9 +26,9 @@ userController.getUser = (req, res, next) => {
     } else {
       // console.log(result.rows)
       res.locals.user = result.rows[0];
-      //return res.redirect("/main");
-      return res.json(res.locals.user);
-      // return next();
+      res.locals.userFound = true;
+      //return res.json(res.locals.user);
+      return next();
     }
   });
 };
@@ -51,6 +51,7 @@ userController.getUser = (req, res, next) => {
 // };
 
 userController.createUser = (req, res, next) => {
+  if (res.locals.userFound === true) return next();
   const user = res.locals.user;
   const queryToCreate = {
     text: `INSERT INTO users (github_url, github_followers_url, github_repos_url, name, github_email, github_twitter_username, github_user_id, github_login) 
@@ -63,7 +64,7 @@ userController.createUser = (req, res, next) => {
       user.email,
       user.twitter_username,
       user.id,
-      user.login,
+      user.login,g
     ],
   };
   db.query(queryToCreate, (err, result) => {
@@ -75,10 +76,40 @@ userController.createUser = (req, res, next) => {
     else {
       console.log('User entry worked!--------------------------------');
       res.locals.user = result.rows[0];
-      //return next();
-      return res.json(res.locals.user);
+      return next();
+      // return res.json(res.locals.user);
     }
   });
+};
+
+userController.getRepos = (req, res, next) => {
+  //fetch request to github_repos_url
+
+  fetch(res.locals.user.github_repos_url)
+    .then(data => data.json())
+    .then(data => {
+      //need to populate sequel DB with result?/////////////////////////////////////////////////////////////////////////////////////////////////
+      //parse data and grab name of each repo
+      const arrOfRepos = data.map(repoObj => {
+        return {
+          name: repoObj.name,
+          subscribersUrl: repoObj.subscribers_url
+        };
+      });
+      res.locals.userWithRepos = {
+        user: res.locals.user,
+        repos: arrOfRepos
+      };
+
+      return next();      
+    })
+    .catch(err => {
+      return next({
+        message: 'Error getting repos in userController.getRepos',
+        error: err
+      });
+    });
+
 };
 
 module.exports = userController;

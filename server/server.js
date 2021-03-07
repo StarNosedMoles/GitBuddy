@@ -9,8 +9,11 @@ const OAuthController = require('./controllers/auth/OAuthController');
 const cookieController = require('./controllers/auth/cookieController');
 const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
+require('dotenv').config();
 
 app.use(bodyParser.json()); //my vscode sais bodyParser is depreciated... we can use express.json?
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -53,19 +56,21 @@ app.get(
 
 app.get(
   '/getUser',
-  OAuthController.getUser, 
+  OAuthController.getUser,
   userController.getUser,
   userController.createUser,
   //userController logic here instead of login to serve info from DB instead of API
   //more controllers to populate repo info before sending response
-
+  userController.getRepos,
   //get one call
-  
   //DO REPO DRILLING
   (req, res) => {
-    return res.json(res.locals.user);
+    console.log('user with repos==============', res.locals.userWithRepos);
+    return res.json(res.locals.userWithRepos);
   }
 );
+
+
 
 app.use('*', (req, res) => {
   res.status(404).send('Not Found');
