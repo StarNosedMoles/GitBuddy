@@ -64,7 +64,7 @@ userController.createUser = (req, res, next) => {
       user.email,
       user.twitter_username,
       user.id,
-      user.login,g
+      user.login,
     ],
   };
   db.query(queryToCreate, (err, result) => {
