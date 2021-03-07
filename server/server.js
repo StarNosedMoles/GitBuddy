@@ -65,7 +65,7 @@ app.get(
   //get one call
   //DO REPO DRILLING
   (req, res) => {
-    console.log('user with repos==============', res.locals.userWithRepos);
+
     return res.json(res.locals.userWithRepos);
   }
 );
