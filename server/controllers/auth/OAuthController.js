@@ -24,13 +24,41 @@ OAuthController.getCode = (req, res, next) => {
       return response.json();
     })
     .then((data) => {
-      console.log('access token', data.access_token);
-      res.locals.userId = data.access_token;
+
+
+      res.locals.accessToken = data.access_token;
       return next();
     })
     .catch((err) => null);
 
 };
+
+OAuthController.getUser = (req, res, next) => {
+  let code;
+
+  if (res.locals.accessToken) code = res.locals.accessToken;
+  else code = req.cookies.SSID;
+
+
+  fetch('https://api.github.com/user', {
+    headers: {Authorization: `token ${code}`}
+  })
+    .then(data => {
+      return data.json()
+    })
+    .then(data => {
+      res.locals.user = data;
+ 
+      return next();
+    })
+    .catch(err => {
+      return next({
+        message: 'Error getting user data in getUser',
+        error: err
+      })
+    })
+}
+
 
 
 module.exports = OAuthController;
