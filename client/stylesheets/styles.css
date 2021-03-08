@@ -6,7 +6,7 @@
 
 .router {
   margin-top: 50px;
-  background-color: C1C9C1;
+  background-color: #C1C9C1;
   text-align: center;
   box-sizing: border-box;
 }
@@ -50,6 +50,13 @@ ul{
   background-color: rgb(201,193,201);
   width: 100%;
 }
+
+.submitButton{
+  margin: 10px;
+  height: 100px;
+  width: 200px;
+}
+
 .repoGrabber {
   /* border: 5px, solid, blueviolet  ;
   background-color: aquamarine; */
