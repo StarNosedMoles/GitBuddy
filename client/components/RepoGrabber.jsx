@@ -9,17 +9,18 @@ function RepoGrabber(props){
     repoArray.push(
       {name: props.repos[i].name,
         key: `checkBox${i}`,
-        label: `Check Box ${i}`
+        label: `Check Box ${i}`,
+        url: props.repos[i].stargazersUrl,
       });
   }
-  // console.log(props);
+  // console.log(repoArray);
     return (
       <React.Fragment>
         {
           repoArray.map(item => (
             <label key={item.key}>
               {item.name}
-              <Checkbox name={item.name} checked={props.checkedItems.get(item.name)} onChange={props.handleChange} />
+              <Checkbox name={item.name} url={item.url} checked={props.checkedItems.get(item.name)} onChange={props.handleChange} />
             </label>
           ))
         }
