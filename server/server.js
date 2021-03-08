@@ -9,6 +9,7 @@ const OAuthController = require('./controllers/auth/OAuthController');
 const cookieController = require('./controllers/auth/cookieController');
 const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
+const repoController = require('./controllers/repoController');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -25,7 +26,7 @@ app.get('/', (req, res) => {
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
-app.use('/', express.static(path.resolve(__dirname, '../client/assets/')));
+app.use('/assets', express.static(path.resolve(__dirname, '../client/assets/')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 //main OAuth Complete
 //UPDATE ---- to serve index after successful login WORKS GREAT
@@ -47,6 +48,7 @@ app.post('/allFollowers',
   (req, res) => {
     return res.json(res.locals.listOfUsersAndEmails);
   });  
+  
 
 app.get(
   '/login',

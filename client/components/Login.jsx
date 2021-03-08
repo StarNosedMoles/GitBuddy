@@ -8,7 +8,7 @@ function Login(props){
   const oAuthUrl = 'https://github.com/login/oauth/authorize?client_id=13e0e054832447d72513&redirect_uri=http://localhost:3000/login';
   return (
     <div className="oauth">
-      <a href={`${oAuthUrl}`} ><img src={ require('../assets/Octocat.jpg') }
+      <a href={`${oAuthUrl}`} ><img src='/assets/Octocat.jpg'
         className="octoCat" 
         alt='GitHub Octocat' 
       ></img></a> 

@@ -83,86 +83,63 @@ userController.createUser = (req, res, next) => {
 };
 
 userController.getRepos = (req, res, next) => {
-  //fetch request to github_repos_url
 
-  fetch(res.locals.user.github_repos_url,
-    {Authorization: `token ${req.cookies.SSID}`
-
-    })
+  fetch(res.locals.user.github_repos_url,{
+    headers: {Authorization: `token ${req.cookies.SSID}`} 
+  })
     .then(data => data.json())
     .then(data => {
       // console.log(data);
       //need to populate sequel DB with result?/////////////////////////////////////////////////////////////////////////////////////////////////
       //parse data and grab name of each repo
-      const arrOfRepos = data.map(repoObj => {
+      const arrOfRepos = data.map(repoObj => {        
         return {
           name: repoObj.name,
           //need to send watchers_url or stargazers_url instead of subscribers_url
           stargazersUrl: repoObj.stargazers_url
         };
-      });
+      });     
       res.locals.userWithRepos = {
         user: res.locals.user,
         repos: arrOfRepos
       };
-
+  
       return next();      
     })
     .catch(err => {
       return next({
-        message: 'Error getting repos in userController.getRepos',
+        message: 'Error getting repos in repoController.getRepos',
         error: err
       });
     });
-
 };
 
 
 
-const sampleRepos = [
-  'https://api.github.com/repos/angusshire/credit-card-exposure/stargazers',
-  'https://api.github.com/repos/angusshire/greenhat/stargazers',
-  'https://api.github.com/repos/angusshire/mac-spoofer/stargazers',
-  'https://api.github.com/repos/angusshire/memscan/stargazers', 
-];
 //authtoken for test
 const authToken = 'f84ac2bb74b46593d71490af2c46dcc6cc67b578';
 userController.getUserInfoFromRepos = (req, res, next) => {
-  console.log('req.body.urls===============', req.body);
-  let array;
-  if (res.locals.userUrls) array = res.locals.userUrls;
-  else array = req.body.urls;
+  //console.log('req.body.urls===============', req.body);
+  const array = req.body.urls;
 
-  console.log(array);
-
-  //req.body is array of urls
-  //each url returns array of objects containing basic userinfo
-  //for testing use sampleRepos
-  //sampleRepos to be replaced with req.body.repos
   //NEED TO INCLUDE AUTHORIZATION IN ALL FETCH REQUESTS TO PREVENT API TIMING OUT
 
   const arrayOfFetch = array.map(url => 
-    fetch(url,
+    //some logic to check if repo is in database
+  //
+    fetch(url,{
+      headers: {Authorization: `token ${req.cookies.SSID}`}
+    }
       //for test use authToken
       //{Authorization: `token ${authToken}`}
-      {Authorization: `token ${req.cookies.SSID}`}
+      // {Authorization: `token ${req.cookies.SSID}`}
     )
       .then(data => data.json())
   );
   //console.log(arrayOfFetch);
   Promise.all(arrayOfFetch)
-
     .then(data => {
-      //console.log(data);
-      // const count = 0;
-
-      // data.forEach(subarr =>{
-      //   console.log(subarr);
-      // });
-      // console.log('length before flattenning=============', count);
-      //parse through data and keep only url from each object in array
       res.locals.userUrls = data.flat().map(userinfo => userinfo.url);
-      //console.log(res.locals.testData);
       return next();
     })
     .catch(err=> {
@@ -173,43 +150,29 @@ userController.getUserInfoFromRepos = (req, res, next) => {
     });
 };
 
-const sampleDataMultipleUsers = [
-  'https://api.github.com/users/LukeLin',
-  'https://api.github.com/users/angusshire',
-  'https://api.github.com/users/Ma27',
-  'https://api.github.com/users/robobenklein',
-  'https://api.github.com/users/sarapowers',
-  'https://api.github.com/users/ktrane1'
-];
+
 userController.getMultipleUsersInfo = (req, res, next) => {
   let array;
   if (res.locals.userUrls) array = res.locals.userUrls;
   else array = req.body.urls;
-  
+
   const arrayOfFetch = array.map(url => 
-  // const arrayOfFetch = sampleDataMultipleUsers.map(url => 
-    fetch(url,
-      //for test use authToken
-      //{Authorization: `token ${authToken}`}
-      //add Authorization header for actual use
-      {Authorization: `token ${req.cookies.SSID}`}
-    )
+    fetch(url, {
+      headers: {Authorization: `token ${req.cookies.SSID}`}
+    })
       .then(data => data.json())
   );
 
   Promise.all(arrayOfFetch)
     .then(data => {
-      //data is array of objects
-      //remove last element from array => event object
-      const listOfUsersAndEmails = data.slice(0, data.length).map(obj =>
-      {
+      const listOfUsersAndEmails = data.slice(0, data.length).map(obj => {
         return {
           user: obj.login,
-          email: obj.email + 'testEmail'
+          email: obj.email
         };
       });
       res.locals.listOfUsersAndEmails = listOfUsersAndEmails;
-      console.log(listOfUsersAndEmails);
+      //console.log(listOfUsersAndEmails);
       return next();
     });
 };
