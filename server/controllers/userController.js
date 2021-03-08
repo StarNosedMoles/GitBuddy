@@ -128,6 +128,12 @@ const sampleRepos = [
 //authtoken for test
 const authToken = 'f84ac2bb74b46593d71490af2c46dcc6cc67b578';
 userController.getUserInfoFromRepos = (req, res, next) => {
+  console.log('req.body.urls===============', req.body);
+  let array;
+  if (res.locals.userUrls) array = res.locals.userUrls;
+  else array = req.body.urls;
+
+  console.log(array);
 
   //req.body is array of urls
   //each url returns array of objects containing basic userinfo
@@ -135,11 +141,11 @@ userController.getUserInfoFromRepos = (req, res, next) => {
   //sampleRepos to be replaced with req.body.repos
   //NEED TO INCLUDE AUTHORIZATION IN ALL FETCH REQUESTS TO PREVENT API TIMING OUT
 
-  const arrayOfFetch = sampleRepos.map(url => 
+  const arrayOfFetch = array.map(url => 
     fetch(url,
       //for test use authToken
       //{Authorization: `token ${authToken}`}
-      {Authorization: `token ${res.cookies.SSID}`}
+      {Authorization: `token ${req.cookies.SSID}`}
     )
       .then(data => data.json())
   );
@@ -178,15 +184,15 @@ const sampleDataMultipleUsers = [
 userController.getMultipleUsersInfo = (req, res, next) => {
   let array;
   if (res.locals.userUrls) array = res.locals.userUrls;
-  else array = req.body;
+  else array = req.body.urls;
   
-  const arrayOfFetch = res.locals.userUrls.map(url => 
+  const arrayOfFetch = array.map(url => 
   // const arrayOfFetch = sampleDataMultipleUsers.map(url => 
     fetch(url,
       //for test use authToken
       //{Authorization: `token ${authToken}`}
       //add Authorization header for actual use
-      {Authorization: `token ${res.cookies.SSID}`}
+      {Authorization: `token ${req.cookies.SSID}`}
     )
       .then(data => data.json())
   );
@@ -203,7 +209,7 @@ userController.getMultipleUsersInfo = (req, res, next) => {
         };
       });
       res.locals.listOfUsersAndEmails = listOfUsersAndEmails;
-      // console.log(listOfUsersAndEmails);
+      console.log(listOfUsersAndEmails);
       return next();
     });
 };

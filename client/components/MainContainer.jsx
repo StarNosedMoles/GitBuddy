@@ -36,7 +36,11 @@ class MainContainer extends Component {
     // fetch request to db for user's repo follower data should go here
     fetch('/repoPost', {
       method: 'POST',
-      body: toBeSent
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({urls: toBeSent})
     })
       .then((res) => res.json())
       .then((data) => {
