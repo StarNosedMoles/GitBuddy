@@ -17,7 +17,7 @@ class MainContainer extends Component {
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.csvExport = this.csvExport.bind(this);
+    // this.csvExport = this.csvExport.bind(this);
 
   }
 
@@ -47,9 +47,9 @@ class MainContainer extends Component {
         console.log(data);
       })
       .catch(err => console.log(err));
-  }
+  
 
-  this.setState({...this.state, toBeSent});
+  this.setState({...this.state, toBeSent}); 
   // fetch request to db for user's repo follower data should go here
   fetch('/repoPost', {
     method: 'POST',
