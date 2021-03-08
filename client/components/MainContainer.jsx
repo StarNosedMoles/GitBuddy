@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RepoGrabber from './RepoGrabber.jsx';
 import DataDisplay from './DataDisplay';
 import CSVExport from './CSVExport';
+import { ExportToCsv } from 'export-to-csv';
 
 class MainContainer extends Component {
   constructor(props){
@@ -12,11 +13,12 @@ class MainContainer extends Component {
       repos: [],
       personalFollowers: [],
       checked: new Map(),
-      toBeSent: new Map(),
+      toBeSent: [],
+      userUrl: '',
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.csvExport = this.csvExport.bind(this);
+    this.csvExport = this.csvExport.bind(this);
 
   }
 
@@ -30,7 +32,7 @@ class MainContainer extends Component {
       }
     }
     this.setState({...this.state, toBeSent});
-    console.log(toBeSent);
+    // console.log(toBeSent);
     // fetch request to db for user's repo follower data should go here
     fetch('/repoPost', {
       method: 'POST',
@@ -42,32 +44,34 @@ class MainContainer extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        this.setState({...this.state, personalFollowers: data})
-        console.log(data);
+        this.setState({...this.state, personalFollowers: data});
+        // console.log(data);
       })
       .catch(err => console.log(err));
     }
 
-//   this.setState({...this.state, toBeSent}); 
-//   // fetch request to db for user's repo follower data should go here
-//   fetch('/repoPost', {
-//     method: 'POST',
-//     body: JSON.stringify({urls: toBeSent})
-//   })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     this.setState({...this.state, personalFollowers: data})
-//     console.log("followers", this.state.personalFollowers)
-//   })
-//   .catch(err => console.log(err))
-// }
 
-// csvExport(){
-
-
-// }
-
-    
+    csvExport(){
+      let data = this.state.personalFollowers;
+        const options = { 
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalSeparator: '.',
+    showLabels: true, 
+    showTitle: true,
+    title: 'Your GitHub Emails',
+    useTextFile: false,
+    useBom: true,
+    useKeysAsHeaders: false,
+    filename: 'emails',
+    headers: ['Username', 'Email',]
+  };
+ 
+const csvExporter = new ExportToCsv(options);
+ 
+csvExporter.generateCsv(data);
+ 
+    }
 
   handleChange(e) {
     const item = e.target.name;
@@ -82,18 +86,19 @@ class MainContainer extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        this.setState({...this.state, name : data.user.name, repos: data.repos});
+        this.setState({...this.state, name : data.user.name, repos: data.repos, userUrl: data.user.github_followers_url});
       })
       .catch(err => console.log(err));
     //that url runs a get request on the db 
   }
 
   render(){ 
+    console.log('state', this.state)
     let nameVar="Chief";
     if(this.state.name){nameVar = this.state.name}
     return(
       <div className="MainContainer">
-        <h3 className="greeting">Hi, {`${nameVar}`}.</h3>
+        <h3 className="greeting">Hi, {`${nameVar}`}. Choose your repos below.</h3>
         <p>Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 
           repos={this.state.repos}
@@ -101,6 +106,7 @@ class MainContainer extends Component {
           getFollowers={this.getFollowers}
           handleChange={this.handleChange}
           checkedItems={this.state.checked}
+          userUrl={this.state.userUrl}
         />
         <DataDisplay 
           personalFollowers={this.state.personalFollowers}

@@ -30,6 +30,7 @@
     "cookie-parser": "^1.4.5",
     "css-loader": "^5.1.1",
     "dotenv": "^8.2.0",
+    "export-to-csv": "^0.2.1",
     "express": "^4.12.3",
     "express-session": "^1.17.1",
     "gulp": "^3.9.0",
