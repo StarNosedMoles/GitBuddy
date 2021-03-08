@@ -13,19 +13,22 @@ function RepoGrabber(props){
       });
   }
   // console.log(props);
-    return (
-      <React.Fragment>
-        {
-          repoArray.map(item => (
-            <label key={item.key}>
-              {item.name}
-              <Checkbox name={item.name} checked={props.checkedItems.get(item.name)} onChange={props.handleChange} />
-            </label>
-          ))
-        }
-        <button onClick={() => props.getFollowers()}>Get My Followers!</button>
-      </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      {
+        repoArray.map(item => (
+          <label className="checkBox" key={item.key}>
+            {item.name}
+            <Checkbox 
+              name={item.name} 
+              checked={props.checkedItems.get(item.name)} 
+              onChange={props.handleChange} />
+          </label>
+        ))
+      }
+      <button className="submitButton" onClick={() => props.getFollowers()}>Get My Followers!</button>
+    </React.Fragment>
+  );
 }
 
 export default RepoGrabber;
