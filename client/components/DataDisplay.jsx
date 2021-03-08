@@ -8,7 +8,7 @@ function DataDisplay(props){
   const repoArray = [];
   for(const el of repoObj){
     // console.log("prop in loop", key)
-    repoArray.push(<p>{el.name}: {el.email}</p>);    
+    repoArray.push(<p>{el}</p>)    
   }
 
   // console.log('repoArray: ', repoArray)
@@ -18,7 +18,8 @@ function DataDisplay(props){
   // })
   return(
     <div className="dataDisplay">
-      <p>Data Display, howdy assholes: {repoArray}</p>
+      <p>Your database holds {`${repoArray.length}`} names</p>
+      <p>{repoArray}</p>
     </div>  
   );
 }

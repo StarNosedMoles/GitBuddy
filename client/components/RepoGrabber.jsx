@@ -27,7 +27,7 @@ function RepoGrabber(props) {
         </label>
       ))}
       <button className="submitButton" onClick={() => props.getFollowers()}>
-        Get My Followers!
+        Save Followers to Database
       </button>
     </React.Fragment>
   );
