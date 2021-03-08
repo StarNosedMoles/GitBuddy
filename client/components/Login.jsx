@@ -20,9 +20,11 @@ function Login(props) {
       <br />
       <Typed
         className="landingClick"
-        strings={["click here to login"]}
+        strings={["click here to login", "click here to see your followers", "click here to see your stargazers"]}
         startDelay={4000}
         typeSpeed={100}
+        backSpeed={100}
+        loop={true, 30}
       />
       <br />
       {/* <p>click here to login</p> */}
