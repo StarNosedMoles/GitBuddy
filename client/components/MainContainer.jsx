@@ -24,6 +24,9 @@ class MainContainer extends Component {
 
   getFollowers(){
     const toBeSent = [];
+    if(this.state.checked.get('Your GitHub followers') === true){
+      toBeSent.push(this.state.userUrl);
+    }
     for(const [key, value] of this.state.checked){
       if (value===true){
         for(const repo of this.state.repos){
