@@ -9,7 +9,6 @@ class MainContainer extends Component {
     this.state = {
       loggedIn: true,
       name: '',
-      // repos: [{name: "myFirst Repo", followers: [1,2,3,4,5]},
       repos: [],
       personalFollowers: [],
       checked: new Map(),
@@ -43,25 +42,25 @@ class MainContainer extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        // this.setState({...this.state, personalFollowers: data.followers})
+        this.setState({...this.state, personalFollowers: data})
         console.log(data);
       })
       .catch(err => console.log(err));
-  
+    }
 
-  this.setState({...this.state, toBeSent}); 
-  // fetch request to db for user's repo follower data should go here
-  fetch('/repoPost', {
-    method: 'POST',
-    body: JSON.stringify({urls: toBeSent})
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    this.setState({...this.state, personalFollowers: data})
-    console.log("followers", this.state.personalFollowers)
-  })
-  .catch(err => console.log(err))
-}
+//   this.setState({...this.state, toBeSent}); 
+//   // fetch request to db for user's repo follower data should go here
+//   fetch('/repoPost', {
+//     method: 'POST',
+//     body: JSON.stringify({urls: toBeSent})
+//   })
+//   .then((res) => res.json())
+//   .then((data) => {
+//     this.setState({...this.state, personalFollowers: data})
+//     console.log("followers", this.state.personalFollowers)
+//   })
+//   .catch(err => console.log(err))
+// }
 
 // csvExport(){
 
@@ -89,10 +88,12 @@ class MainContainer extends Component {
     //that url runs a get request on the db 
   }
 
-  render(){
+  render(){ 
+    let nameVar="Chief";
+    if(this.state.name){nameVar = this.state.name}
     return(
       <div className="MainContainer">
-        <h3 className="greeting">Hi, {this.state.name}.</h3>
+        <h3 className="greeting">Hi, {`${nameVar}`}.</h3>
         <p>Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 
           repos={this.state.repos}
