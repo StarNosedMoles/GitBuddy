@@ -34,7 +34,7 @@
     "express-session": "^1.17.1",
     "gulp": "^3.9.0",
     "mongodb": "^3.6.4",
-    "mongoose": "^5.11.18",
+    "mongoose": "^5.11.19",
     "node-fetch": "^2.6.1",
     "node-sass": "^5.0.0",
     "octokat": "^0.10.0",
