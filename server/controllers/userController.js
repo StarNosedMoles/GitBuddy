@@ -86,7 +86,7 @@ userController.getRepos = (req, res, next) => {
   //fetch request to github_repos_url
 
   fetch(res.locals.user.github_repos_url,
-    {Authorization: `token ${req.cookies.SSID}`
+    {headers: {Authorization: `token ${req.cookies.SSID}`}
 
     })
     .then(data => data.json())
@@ -145,7 +145,7 @@ userController.getUserInfoFromRepos = (req, res, next) => {
     fetch(url,
       //for test use authToken
       //{Authorization: `token ${authToken}`}
-      {Authorization: `token ${req.cookies.SSID}`}
+      {headers: {Authorization: `token ${req.cookies.SSID}`}}
     )
       .then(data => data.json())
   );
@@ -192,7 +192,7 @@ userController.getMultipleUsersInfo = (req, res, next) => {
       //for test use authToken
       //{Authorization: `token ${authToken}`}
       //add Authorization header for actual use
-      {Authorization: `token ${req.cookies.SSID}`}
+      {headers: {Authorization: `token ${req.cookies.SSID}`}}
     )
       .then(data => data.json())
   );

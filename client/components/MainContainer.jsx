@@ -17,7 +17,6 @@ class MainContainer extends Component {
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
     // this.csvExport = this.csvExport.bind(this);
-
   }
 
   getFollowers(){
@@ -93,9 +92,10 @@ class MainContainer extends Component {
     if(this.state.name){nameVar = this.state.name}
     return(
       <div className="MainContainer">
-        <h3 className="greeting">Hi, {`${nameVar}`}.</h3>
-        <p>Select your GitHub Followers and/or your Repo Stargazers</p>
+        <h3 className="greeting" id='grettingID'>Hi, {`${nameVar}`}.</h3>
+        <p id='greetingDetail' >Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 
+          id='repoGrabberID'
           repos={this.state.repos}
           personalFollowers={this.state.personalFollowers}
           getFollowers={this.getFollowers}
@@ -103,9 +103,11 @@ class MainContainer extends Component {
           checkedItems={this.state.checked}
         />
         <DataDisplay 
+          id='dataDisplayID'
           personalFollowers={this.state.personalFollowers}
         />
-        <CSVExport 
+        <CSVExport
+          id="csvExportID" 
           csvExport={this.csvExport}
         />
       </div>
