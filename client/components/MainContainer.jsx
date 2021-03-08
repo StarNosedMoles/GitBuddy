@@ -48,7 +48,7 @@ class MainContainer extends Component {
         // console.log(data);
       })
       .catch(err => console.log(err));
-    }
+}
 
 
     csvExport(){
@@ -98,9 +98,10 @@ csvExporter.generateCsv(data);
     if(this.state.name){nameVar = this.state.name}
     return(
       <div className="MainContainer">
-        <h3 className="greeting">Hi, {`${nameVar}`}. Choose your repos below.</h3>
-        <p>Select your GitHub Followers and/or your Repo Stargazers</p>
+        <h3 className="greeting" id='grettingID'>Hi, {`${nameVar}`}.</h3>
+        <p id='greetingDetail' >Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 
+          id='repoGrabberID'
           repos={this.state.repos}
           personalFollowers={this.state.personalFollowers}
           getFollowers={this.getFollowers}
@@ -109,10 +110,12 @@ csvExporter.generateCsv(data);
           userUrl={this.state.userUrl}
         />
         <DataDisplay 
+          id='dataDisplayID'
           personalFollowers={this.state.personalFollowers}
         />
-        <CSVExport 
-        csvExport={this.csvExport}
+        <CSVExport
+          id="csvExportID" 
+          csvExport={this.csvExport}
         />
       </div>
     );

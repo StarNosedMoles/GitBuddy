@@ -84,9 +84,10 @@ userController.createUser = (req, res, next) => {
 
 userController.getRepos = (req, res, next) => {
 
-  fetch(res.locals.user.github_repos_url,{
-    headers: {Authorization: `token ${req.cookies.SSID}`} 
-  })
+  fetch(res.locals.user.github_repos_url,
+    {headers: {Authorization: `token ${req.cookies.SSID}`}
+
+    })
     .then(data => data.json())
     .then(data => {
       // console.log(data);

@@ -15,6 +15,7 @@ function DataDisplay(props){
   // props.fakeCheckedItems.forEach(el=>{
   //   items.push(<p>{el}</p>)
   // })
+
   return(
     <div className="dataDisplay">
       <p>Your database holds {`${repoArray.length}`} names</p>

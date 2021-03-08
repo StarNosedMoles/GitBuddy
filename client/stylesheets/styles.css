@@ -30,28 +30,53 @@
 } */
 .MainContainer{
   border: solid 4px white;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+#greetingID {grid-area: greet;}
+#greetingDetail {grid-area: detail;}
+#repoGrabberID {grid-area: repos;}
+#dataDisplayID {
+  text-align: center;
+}
+#csvExportID {  
+  margin: 10px;
+  margin: 10px;
+  height: 100px;
+  width: 200px;}
+
 ul{
   list-style-type: none;
+  text-align: center;
 }
 .checkBox {
-  border: solid, 4px, blueviolet  ;
-  background-color: aquamarine;
   display: flex;
-  /* flex-direction: column; */
-  text-align:justify;
-  align-items:inherit;
-  padding: 5px;
+  margin: 10px;
+  border: solid, 4px, blueviolet ;
+  background-color: aquamarine;
+  text-align:center;
   align-content:center;
 }
 
 .dataDisplay{
+  margin: 10px;
   border: solid 4px black;
   background-color: rgb(201,193,201);
-  width: 100%;
+  height: 150px;
+  width: 600px; 
+  line-height: 3em; 
+  overflow: scroll; 
+  padding: 5px;
 }
 
 .submitButton{
+  margin: 10px;
   margin: 10px;
   height: 100px;
   width: 200px;
