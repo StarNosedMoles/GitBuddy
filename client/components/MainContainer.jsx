@@ -98,7 +98,7 @@ csvExporter.generateCsv(data);
     if(this.state.name){nameVar = this.state.name}
     return(
       <div className="MainContainer">
-        <h3 className="greeting" id='grettingID'>Hi, {`${nameVar}`}.</h3>
+        <p className="greeting" id='grettingID'>Hi, {`${nameVar}`}. <br/>Check out your followers below.</p>
         <p id='greetingDetail' >Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 
           id='repoGrabberID'

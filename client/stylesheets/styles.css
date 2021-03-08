@@ -5,7 +5,7 @@
 }
 
 .router {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   background-color: #C1C9C1;
   text-align: center;
   box-sizing: border-box;
@@ -14,6 +14,7 @@
   color: #414941;
   font-size: 42px;
   font-weight: bolder;
+  margin-bottom: none;
   /* margin-top: 100px; */
 }
 .landingClick{
@@ -23,13 +24,14 @@
 
 .greeting{
   color:  rgb(73,65,73);
-  border: solid 4px  purple; 
+  font-size: 28px;
 }
 /* h1 {
   text-align: center;
 } */
 .MainContainer{
-  border: solid 4px white;
+  color: rgb(73,65,73);
+  /* border: solid 4px white; */
   text-align: center;
   padding: 0;
   margin: 0;
@@ -39,17 +41,15 @@
   align-items: center;
   justify-content: center;
 }
-#greetingID {grid-area: greet;}
-#greetingDetail {grid-area: detail;}
-#repoGrabberID {grid-area: repos;}
-#dataDisplayID {
-  text-align: center;
+
+.csvButton {  
+  color: rgb(73,65,73);
+  margin: 10px;
+  margin: 10px;
+  height: 80px;
+  width: 200px;
+  border-radius: 20px;
 }
-#csvExportID {  
-  margin: 10px;
-  margin: 10px;
-  height: 100px;
-  width: 200px;}
 
 ul{
   list-style-type: none;
@@ -57,29 +57,51 @@ ul{
 }
 .checkBox {
   display: flex;
-  margin: 10px;
-  border: solid, 4px, blueviolet ;
-  background-color: aquamarine;
+  margin: 2px;
+  /* border: solid, 4px, blueviolet ; */
+  /* background-color: aquamarine; */
   text-align:center;
   align-content:center;
 }
 
 .dataDisplay{
   margin: 10px;
-  border: solid 4px black;
+  /* border: solid 4px #414941; */
+  border-radius: 5px;
   background-color: rgb(201,193,201);
   height: 150px;
   width: 600px; 
-  line-height: 3em; 
+  box-shadow: 2px 2px 8px #626E62;
+  /* line-height: 3em;  */
   overflow: scroll; 
-  padding: 5px;
+  overflow-x:hidden;
+  /* padding: 5px; */
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.3); 
+  border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.5); 
+}
+
+button:hover {
+  cursor: pointer;
+}
 .submitButton{
+  color: rgb(73,65,73);
   margin: 10px;
   margin: 10px;
-  height: 100px;
+  height: 80px;
   width: 200px;
+  border-radius: 20px;
 }
 
 .repoGrabber {
