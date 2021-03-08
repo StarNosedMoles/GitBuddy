@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
-app.use('/', express.static(path.resolve(__dirname, '../client/assets/')));
+app.use('/assets', express.static(path.resolve(__dirname, '../client/assets/')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 //main OAuth Complete
 //UPDATE ---- to serve index after successful login WORKS GREAT

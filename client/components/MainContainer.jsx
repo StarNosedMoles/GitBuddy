@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RepoGrabber from './RepoGrabber.jsx';
 import DataDisplay from './DataDisplay';
+import CSVExport from './CSVExport';
 
 class MainContainer extends Component {
   constructor(props){
@@ -10,15 +11,13 @@ class MainContainer extends Component {
       name: '',
       // repos: [{name: "myFirst Repo", followers: [1,2,3,4,5]},
       repos: [],
-      personalFollowers: [{ name : 'Kushal', email: 'fakeemail@email.email' },  
-      { name : 'David', email: 'fakeemail@email.email' },  
-      { name : 'Joseph', email: 'fakeemail@email.email' },  
-      { name : 'Greg', email: 'fakeemail@email.email' },],
+      personalFollowers: [],
       checked: new Map(),
       toBeSent: [],
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.csvExport = this.csvExport.bind(this);
 
   }
 
@@ -32,18 +31,22 @@ class MainContainer extends Component {
     }
   }
   this.setState({...this.state, toBeSent});
-  console.log(toBeSent)
   // fetch request to db for user's repo follower data should go here
   fetch('/repoPost', {
     method: 'POST',
-    body: toBeSent
+    body: JSON.stringify({urls: toBeSent})
   })
   .then((res) => res.json())
   .then((data) => {
-    // this.setState({...this.state, personalFollowers: data.followers})
-    console.log(data)
+    this.setState({...this.state, personalFollowers: data})
+    console.log("followers", this.state.personalFollowers)
   })
   .catch(err => console.log(err))
+}
+
+csvExport(){
+
+
 }
     
 
@@ -79,6 +82,9 @@ class MainContainer extends Component {
         />
         <DataDisplay 
           personalFollowers={this.state.personalFollowers}
+        />
+        <CSVExport 
+        csvExport={this.csvExport}
         />
       </div>
     );
