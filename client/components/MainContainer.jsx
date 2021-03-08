@@ -22,14 +22,33 @@ class MainContainer extends Component {
   }
 
   getFollowers(){
-    let toBeSent = []
+    const toBeSent = [];
     for(const [key, value] of this.state.checked){
-    if (value===true){
-      for(let repo of this.state.repos){
-        if(key === repo.name){toBeSent.push(repo.stargazersUrl)}
+      if (value===true){
+        for(const repo of this.state.repos){
+          if(key === repo.name){toBeSent.push(repo.stargazersUrl);}
+        }
       }
     }
+    this.setState({...this.state, toBeSent});
+    console.log(toBeSent);
+    // fetch request to db for user's repo follower data should go here
+    fetch('/repoPost', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({urls: toBeSent})
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // this.setState({...this.state, personalFollowers: data.followers})
+        console.log(data);
+      })
+      .catch(err => console.log(err));
   }
+
   this.setState({...this.state, toBeSent});
   // fetch request to db for user's repo follower data should go here
   fetch('/repoPost', {
@@ -48,18 +67,19 @@ csvExport(){
 
 
 }
+
     
 
-    handleChange(e) {
+  handleChange(e) {
     const item = e.target.name;
     const isChecked = e.target.checked;
-    this.setState(prevState => ({...this.state, checked: prevState.checked.set(item, isChecked) }))
+    this.setState(prevState => ({...this.state, checked: prevState.checked.set(item, isChecked) }));
     // console.log(this.state)
   }
 
   componentDidMount () {
     //db fetch request
-    fetch("/getUser")
+    fetch('/getUser')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
