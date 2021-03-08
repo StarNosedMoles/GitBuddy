@@ -15,7 +15,7 @@ class MainContainer extends Component {
         { name : 'Joseph', email: 'fakeemail@email.email' },  
         { name : 'Greg', email: 'fakeemail@email.email' },],
       checked: new Map(),
-      toBeSent: new Map(),
+      toBeSent: [],
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,22 +23,35 @@ class MainContainer extends Component {
   }
 
   getFollowers(){
-    const toBeSent = new Map();
+    const toBeSent = [];
     for(const [key, value] of this.state.checked){
-      console.log('key in loop', key, value);
       if (value===true){
-        toBeSent.set(key, value);
-      }}
-    console.log('toBeSent in func?', toBeSent);
-    this.setState({...this.state, toBeSent: toBeSent});
-    setTimeout(() => {console.log('toBeSent in state?', this.state);}, 1000);
+        for(const repo of this.state.repos){
+          if(key === repo.name){toBeSent.push(repo.stargazersUrl);}
+        }
+      }
+    }
+    this.setState({...this.state, toBeSent});
+    console.log(toBeSent);
     // fetch request to db for user's repo follower data should go here
+    fetch('/repoPost', {
+      method: 'POST',
+      body: toBeSent
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // this.setState({...this.state, personalFollowers: data.followers})
+        console.log(data);
+      })
+      .catch(err => console.log(err));
   }
+    
 
   handleChange(e) {
     const item = e.target.name;
     const isChecked = e.target.checked;
     this.setState(prevState => ({...this.state, checked: prevState.checked.set(item, isChecked) }));
+    // console.log(this.state)
   }
 
   componentDidMount () {
