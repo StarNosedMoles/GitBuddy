@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Router, Link, useLocation } from 'react-router-dom';
+import Typed from 'react-typed';
 
 import Login from './components/Login.jsx';
 import MainContainer from './components/MainContainer.jsx';
@@ -10,7 +11,13 @@ class App extends Component {
   render(){
     return (
       <div className="router">
-        <h1>gitBuddy</h1>
+        <Typed      
+          className="header"
+          strings={['GitBuddy']}
+          typeSpeed={300}
+        />
+        <br/>
+        {/* <h1>gitBuddy</h1>  */}
 
         <main>
 

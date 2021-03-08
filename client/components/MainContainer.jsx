@@ -73,7 +73,7 @@ class MainContainer extends Component {
   render(){
     return(
       <div className="MainContainer">
-        <h3>Hi, {this.state.name}. Would you like to see your bomb ass repos?</h3>
+        <h3 className="greeting">Hi, {this.state.name}. Would you like to see your bomb ass repos?</h3>
         <RepoGrabber 
           repos={this.state.repos}
           personalFollowers={this.state.personalFollowers}
