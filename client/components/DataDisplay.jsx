@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 function DataDisplay(props){
   // console.log('props: ', props.personalFollowers)
   const repoObj = props.personalFollowers;

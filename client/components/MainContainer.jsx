@@ -13,11 +13,11 @@ class MainContainer extends Component {
       repos: [],
       personalFollowers: [],
       checked: new Map(),
-      toBeSent: [],
+      toBeSent: new Map(),
     };
     this.getFollowers = this.getFollowers.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.csvExport = this.csvExport.bind(this);
+    // this.csvExport = this.csvExport.bind(this);
 
   }
 
@@ -47,9 +47,9 @@ class MainContainer extends Component {
         console.log(data);
       })
       .catch(err => console.log(err));
-  }
+  
 
-  this.setState({...this.state, toBeSent});
+  this.setState({...this.state, toBeSent}); 
   // fetch request to db for user's repo follower data should go here
   fetch('/repoPost', {
     method: 'POST',
@@ -63,10 +63,10 @@ class MainContainer extends Component {
   .catch(err => console.log(err))
 }
 
-csvExport(){
+// csvExport(){
 
 
-}
+// }
 
     
 
@@ -92,7 +92,8 @@ csvExport(){
   render(){
     return(
       <div className="MainContainer">
-        <h3 className="greeting">Hi, {this.state.name}. Would you like to see your bomb ass repos?</h3>
+        <h3 className="greeting">Hi, {this.state.name}.</h3>
+        <p>Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 
           repos={this.state.repos}
           personalFollowers={this.state.personalFollowers}

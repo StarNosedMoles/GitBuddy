@@ -12,7 +12,7 @@ function Login(props) {
     <div className="oauth">
       <a href={`${oAuthUrl}`}>
         <img
-          src="/assets/Octocat.jpg"
+          src='/assets/Octocat.png'
           className="octoCat"
           alt="GitHub Octocat"
         ></img>
