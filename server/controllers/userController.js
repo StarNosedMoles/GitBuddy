@@ -93,7 +93,8 @@ userController.getRepos = (req, res, next) => {
       const arrOfRepos = data.map(repoObj => {
         return {
           name: repoObj.name,
-          subscribersUrl: repoObj.subscribers_url
+          //need to send watchers_url or stargazers_url instead of subscribers_url
+          stargazersUrl: repoObj.stargazers_url
         };
       });
       res.locals.userWithRepos = {
@@ -110,6 +111,47 @@ userController.getRepos = (req, res, next) => {
       });
     });
 
+};
+
+
+
+const sampleRepos = [
+  'https://api.github.com/repos/angusshire/credit-card-exposure/stargazers',
+  'https://api.github.com/repos/angusshire/greenhat/stargazers',
+  'https://api.github.com/repos/angusshire/mac-spoofer/stargazers',
+  'https://api.github.com/repos/angusshire/memscan/stargazers', 
+];
+userController.getUserInfoFromRepos = (req, res, next) => {
+
+  //req.body is array of urls
+  //each url returns array of objects containing basic userinfo
+  //for testing use sampleRepos
+  const arrayOfFetch = sampleRepos.map(url => 
+    fetch(url)
+      .then(data => data.json())
+  );
+  //console.log(arrayOfFetch);
+  Promise.all(arrayOfFetch)
+
+    .then(data => {
+      //console.log(data);
+      // const count = 0;
+
+      // data.forEach(subarr =>{
+      //   console.log(subarr);
+      // });
+      // console.log('length before flattenning=============', count);
+      //parse through data and keep only url from each object in array
+      res.locals.testData = data.flat().map(userinfo => userinfo.url);
+      //console.log(res.locals.testData);
+      return next();
+    })
+    .catch(err=> {
+      return next({
+        message: 'Error resolving multiple promises in userController.getUserInfoFromRepos',
+        error: err,
+      });
+    });
 };
 
 module.exports = userController;
