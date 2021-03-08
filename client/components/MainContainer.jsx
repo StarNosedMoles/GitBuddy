@@ -48,25 +48,25 @@ class MainContainer extends Component {
       })
       .catch(err => console.log(err));
   
+    
+    this.setState({...this.state, toBeSent}); 
+    // fetch request to db for user's repo follower data should go here
+    // fetch('/repoPost', {
+    //   method: 'POST',
+    //   body: JSON.stringify({urls: toBeSent})
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     this.setState({...this.state, personalFollowers: data});
+    //     console.log("followers", this.state.personalFollowers);
+    //   })
+    //   .catch(err => console.log(err));
+  }
 
-  this.setState({...this.state, toBeSent}); 
-  // fetch request to db for user's repo follower data should go here
-  fetch('/repoPost', {
-    method: 'POST',
-    body: JSON.stringify({urls: toBeSent})
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    this.setState({...this.state, personalFollowers: data})
-    console.log("followers", this.state.personalFollowers)
-  })
-  .catch(err => console.log(err))
-}
-
-// csvExport(){
+  // csvExport(){
 
 
-// }
+  // }
 
     
 
@@ -105,7 +105,7 @@ class MainContainer extends Component {
           personalFollowers={this.state.personalFollowers}
         />
         <CSVExport 
-        csvExport={this.csvExport}
+          csvExport={this.csvExport}
         />
       </div>
     );
