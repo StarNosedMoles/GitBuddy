@@ -12,7 +12,7 @@ function Login(props) {
     <div className="oauth">
       <a href={`${oAuthUrl}`}>
         <img
-          src="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+          src='/assets/Octocat.png'
           className="octoCat"
           alt="GitHub Octocat"
         ></img>
