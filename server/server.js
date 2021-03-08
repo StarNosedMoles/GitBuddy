@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
-
+app.use('/', express.static(path.resolve(__dirname, '../client/assets/')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 //main OAuth Complete
 //UPDATE ---- to serve index after successful login WORKS GREAT
@@ -33,6 +33,15 @@ app.get('/main', (req, res) => {
   //console.log("test for session object----------", req.session.user);
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
+
+//test route for angusshire multiple api requests to grab follower details from selected repos
+app.post('/repoPost', 
+
+  userController.getUserInfoFromRepos,
+
+  (req, res) => {
+    return res.json(res.locals.testData);
+  });
 
 app.get(
   '/login',
