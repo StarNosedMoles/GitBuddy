@@ -33,3 +33,7 @@ MongoDB for Users
 David & Greg: Front-end
 Kushal & Joseph: Back-end
 
+Notes regarding the back end
+
+Client ID, Client secret and Mongo URI are encrypted using dotenv package. You will need to obtain your own Client ID, Client secret and Mongo URI for middleware to function correctly.
+Please also note that any API requests to the gitHub API require an Authorization header that includes the access token returned on a successful OAuth login - this allows you to see the email property from any user that has allowed their email to be public. The Authorization header also increases the rate limit for requests to the API.
