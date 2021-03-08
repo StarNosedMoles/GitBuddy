@@ -3,13 +3,19 @@ import Repo from "./Repo";
 import Checkbox from "./Checkbox";
 
 function RepoGrabber(props) {
+  // console.log('repog', props)
   let repoArray = [];
+  repoArray.push({name: 'Your GitHub followers',
+  key: `checkBox0'`,
+  label:`Check Box 0`,
+  url: props.userUrl,
+});
   //another with details about repo
   for (let i = 0; i < props.repos.length; i++) {
     repoArray.push({
       name: props.repos[i].name,
-      key: `checkBox${i}`,
-      label: `Check Box ${i}`,
+      key: `checkBox${i+1}`,
+      label: `Check Box ${i+1}`,
       url: props.repos[i].stargazersUrl,
     });
   }
