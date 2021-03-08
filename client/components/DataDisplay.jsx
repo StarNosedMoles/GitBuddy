@@ -16,7 +16,11 @@ function DataDisplay(props){
   // props.fakeCheckedItems.forEach(el=>{
   //   items.push(<p>{el}</p>)
   // })
-  return(<p>Data Display, howdy assholes: {repoArray}</p>);
+  return(
+    <div className="dataDisplay">
+      <p>Data Display, howdy assholes: {repoArray}</p>
+    </div>  
+  );
 }
 
 export default DataDisplay;

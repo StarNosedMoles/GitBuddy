@@ -69,16 +69,16 @@ class MainContainer extends Component {
   render(){
     return(
       <div className="MainContainer">
-        <h3>Hi, {this.state.name}. Would you like to see your bomb ass repos?</h3>
+        <h3 className="greeting">Hi, {this.state.name}. Would you like to see your bomb ass repos?</h3>
         <RepoGrabber 
-        repos={this.state.repos}
-        personalFollowers={this.state.personalFollowers}
-        getFollowers={this.getFollowers}
-        handleChange={this.handleChange}
-        checkedItems={this.state.checked}
+          repos={this.state.repos}
+          personalFollowers={this.state.personalFollowers}
+          getFollowers={this.getFollowers}
+          handleChange={this.handleChange}
+          checkedItems={this.state.checked}
         />
         <DataDisplay 
-        personalFollowers={this.state.personalFollowers}
+          personalFollowers={this.state.personalFollowers}
         />
       </div>
     );
