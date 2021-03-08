@@ -120,7 +120,7 @@ userController.getRepos = (req, res, next) => {
 //authtoken for test
 const authToken = 'f84ac2bb74b46593d71490af2c46dcc6cc67b578';
 userController.getUserInfoFromRepos = (req, res, next) => {
-  //console.log('req.body.urls===============', req.body);
+  console.log('req.body.urls===============', req.body);
   const array = req.body.urls;
 
   //NEED TO INCLUDE AUTHORIZATION IN ALL FETCH REQUESTS TO PREVENT API TIMING OUT
@@ -156,6 +156,10 @@ userController.getMultipleUsersInfo = (req, res, next) => {
   let array;
   if (res.locals.userUrls) array = res.locals.userUrls;
   else array = req.body.urls;
+  //to make up for duplicates
+  array = [...new Set(array)];
+
+  console.log(`req body===================`, req.body)
 
   const arrayOfFetch = array.map(url => 
     fetch(url, {

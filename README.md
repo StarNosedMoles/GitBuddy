@@ -32,3 +32,4 @@ Authentication
 MongoDB for Users
 David & Greg: Front-end
 Kushal & Joseph: Back-end
+

@@ -17,6 +17,11 @@ repoController.getRepos = (req, res, next) => {
       //need to populate sequel DB with result?/////////////////////////////////////////////////////////////////////////////////////////////////
       //parse data and grab name of each repo
       const arrOfRepos = data.map(async repoObj => {
+        // create a new promise object
+          // in the callback to the Promise constructor,
+            // perform your async actions
+            // when they complete, call resolve(), thus resolving the promise
+
         //check if isnt repo is in DB by using repoObj.id with _id 
         let repoResult;
 
@@ -25,7 +30,7 @@ repoController.getRepos = (req, res, next) => {
           values: [`${repoObj.id}`]
         };
 
-        await db.query(queryToGetRepo, (err, result) => {
+        db.query(queryToGetRepo, (err, result) => {
           // console.log('result from getRepo query================', result.rows);
           if (err) {
             return next({
@@ -33,7 +38,6 @@ repoController.getRepos = (req, res, next) => {
               error: err,
             });
           }
-          
           else if (!result.rows[0]) {
             //create entry in repo DB
           
@@ -71,9 +75,9 @@ repoController.getRepos = (req, res, next) => {
             stargazersUrl: result.rows[0].stargazers_url,
             id: result.rows[0].repo_id 
           };
-        }).then(data => {
-          return repoResult;
-        });
+        }).then(data=> {repoResult})
+        return repoResult;
+        
        
         //if not in database => create new repo entry in database
         //return entry from database with {name:__________, stargazersUrl: ________________}
