@@ -36,12 +36,17 @@ app.get('/main', (req, res) => {
 
 //test route for angusshire multiple api requests to grab follower details from selected repos
 app.post('/repoPost', 
-
   userController.getUserInfoFromRepos,
-
+  userController.getMultipleUsersInfo,
   (req, res) => {
-    return res.json(res.locals.testData);
+    return res.json(res.locals.listOfUsersAndEmails);
   });
+
+app.post('/allFollowers', 
+  userController.getMultipleUsersInfo,
+  (req, res) => {
+    return res.json(res.locals.listOfUsersAndEmails);
+  });  
 
 app.get(
   '/login',
