@@ -7,7 +7,11 @@ function DataDisplay(props){
   const repoArray = [];
   for(const el of repoObj){
     // console.log("prop in loop", key)
+    if(el.email){
     repoArray.push(<p>Name: {el.user}, Email: {el.email} </p>)    
+    }else{
+      repoArray.push(<p>Name: {el.user}, Email: {"private"} </p>)
+    }
   }
 
   // console.log('repoArray: ', repoArray)
