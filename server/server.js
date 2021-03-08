@@ -9,6 +9,7 @@ const OAuthController = require('./controllers/auth/OAuthController');
 const cookieController = require('./controllers/auth/cookieController');
 const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
+const repoController = require('./controllers/repoController');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -47,6 +48,7 @@ app.post('/allFollowers',
   (req, res) => {
     return res.json(res.locals.listOfUsersAndEmails);
   });  
+  
 
 app.get(
   '/login',

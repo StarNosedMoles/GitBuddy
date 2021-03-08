@@ -4,7 +4,10 @@ const PG_URI = 'postgres://cpiggewx:5n8_pbBof-NEDHca7Cl8lpgYAgdQ9he0@ziggy.db.el
 
 
 const pool = new Pool({
-  connectionString: PG_URI
+  connectionString: PG_URI,
+  max: 1,
+  min: 0,
+  idle: 10000,
 });
   
 // Adding some notes about the database here will be helpful for future you or other developers.
