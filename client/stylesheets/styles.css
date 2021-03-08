@@ -1,39 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
 * {
   font-family: 'Source Code Pro', monospace;
-  background-color: seagreen;
+}
+
+.router {
+  margin-top: 50px;
+  background-color: #C1C9C1;
   text-align: center;
   box-sizing: border-box;
 }
+.header {
+  color: #414941;
+  font-size: 42px;
+  font-weight: bolder;
+  /* margin-top: 100px; */
+}
+.landingClick{
+  color: #414941;
+  font-weight: lighter;
+}
 
-h1 {
-  padding-top: 100px;
+.greeting{
+  color:  rgb(73,65,73);
+  border: solid 4px  purple; 
 }
 /* h1 {
   text-align: center;
 } */
-
+.MainContainer{
+  border: solid 4px white;
+}
 ul{
   list-style-type: none;
 }
-.repo {
-  border: 5px, solid, blueviolet  ;
+.checkBox {
+  border: solid, 4px, blueviolet  ;
   background-color: aquamarine;
-    display: flex;
-  flex-direction: column;
-  align-content: space-between;
+  display: flex;
+  /* flex-direction: column; */
+  text-align:justify;
+  align-items:inherit;
+  padding: 5px;
+  align-content:center;
+}
+
+.dataDisplay{
+  border: solid 4px black;
+  background-color: rgb(201,193,201);
+  width: 100%;
+}
+
+.submitButton{
+  margin: 10px;
+  height: 100px;
+  width: 200px;
 }
 
 .repoGrabber {
-  border: 5px, solid, blueviolet  ;
-  background-color: aquamarine;
+  /* border: 5px, solid, blueviolet  ;
+  background-color: aquamarine; */
   /* display: flex;
   flex-direction: column;
   align-content: space-between; */
 }
 
 .octoCat {
+  margin-top: 50px;
+  padding: 20px;
   height: 200px;
   width: 250px;
 }

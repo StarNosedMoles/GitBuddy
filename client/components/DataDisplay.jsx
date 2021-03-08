@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 function DataDisplay(props){
   // console.log('props: ', props.personalFollowers)
   const repoObj = props.personalFollowers;
@@ -8,7 +7,7 @@ function DataDisplay(props){
   const repoArray = [];
   for(const el of repoObj){
     // console.log("prop in loop", key)
-    repoArray.push(<p>{el.name}: {el.email}</p>);    
+    repoArray.push(<p>Name: {el.user}, Email: {el.email} </p>)    
   }
 
   // console.log('repoArray: ', repoArray)
@@ -16,7 +15,12 @@ function DataDisplay(props){
   // props.fakeCheckedItems.forEach(el=>{
   //   items.push(<p>{el}</p>)
   // })
-  return(<p>Data Display, howdy assholes: {repoArray}</p>);
+  return(
+    <div className="dataDisplay">
+      <p>Your database holds {`${repoArray.length}`} names</p>
+      <p>{repoArray}</p>
+    </div>  
+  );
 }
 
 export default DataDisplay;
