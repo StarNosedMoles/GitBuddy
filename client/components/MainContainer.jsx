@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Typed from "react-typed";
+
 import RepoGrabber from './RepoGrabber.jsx';
 import DataDisplay from './DataDisplay';
 import CSVExport from './CSVExport';
@@ -101,6 +103,12 @@ csvExporter.generateCsv(data);
     if(this.state.name){nameVar = this.state.name}
     return(
       <div className="MainContainer">
+                <Typed      
+          className="headerMainContainer"
+          strings={['GitBuddy']}
+          typeSpeed={300}
+        />
+        <br/>
         <p className="greeting" id='grettingID'>Hi, {`${nameVar}`}. <br/>Check out your followers below.</p>
         <p id='greetingDetail' >Select your GitHub Followers and/or your Repo Stargazers</p>
         <RepoGrabber 

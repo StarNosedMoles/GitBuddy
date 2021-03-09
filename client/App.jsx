@@ -11,12 +11,6 @@ class App extends Component {
   render(){
     return (
       <div className="router">
-        <Typed      
-          className="header"
-          strings={['GitBuddy']}
-          typeSpeed={300}
-        />
-        <br/>
         {/* <h1>gitBuddy</h1>  */}
 
         <main>
