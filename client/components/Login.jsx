@@ -10,6 +10,12 @@ function Login(props) {
     "https://github.com/login/oauth/authorize?client_id=13e0e054832447d72513&redirect_uri=http://localhost:3000/login";
   return (
     <div className="oauth">
+              <Typed      
+          className="headerLogin"
+          strings={['GitBuddy']}
+          typeSpeed={300}
+        />
+        <br/>
       <a href={`${oAuthUrl}`}>
         <img
           src='/assets/Octocat.png'

@@ -10,7 +10,17 @@
   text-align: center;
   box-sizing: border-box;
 }
-.header {
+
+.headerLogin{  font-size: 42px;
+  font-weight: bolder;
+}
+
+.oauth{
+  color: #414941;
+  margin-bottom: none;
+  padding-top: 100px;
+}
+.headerMainContainer {
   color: #414941;
   font-size: 42px;
   font-weight: bolder;
